@@ -1,7 +1,5 @@
 #include <stdio.h>
 
-// A - Array to be sorted
-// n - Length of A
 void insertionSort(int [], int);
 
 
@@ -32,8 +30,10 @@ int main() {
   return 0;
 }
 
+// A - Array to be sorted
+// n - Length of A
 void insertionSort(int A[], int n) {
-  for (int i = 0; i < n; i++) {
+  for (int i = 1; i < n; i++) {
     int current = A[i];
     int j = i - 1;
     while (j >= 0 && A[j] > current) {
