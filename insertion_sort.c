@@ -2,8 +2,8 @@
 
 void insertionSort(int [], int);
 
-
-int main() {
+int main()
+{
   int size;
   printf("Array size: ");
   scanf("%i", &size);
@@ -11,7 +11,8 @@ int main() {
   int array[size];
 
   printf("Unsorted array:\n");
-  for (int i = 0; i < size; i++) {
+  for (int i = 0; i < size; i++)
+  {
     array[i] = rand() % 100;
     printf("%i ", array[i]);
   }
@@ -21,7 +22,8 @@ int main() {
   printf("Sorted array:\n");
   insertionSort(array, size);
 
-  for (int i = 0; i < size; i++) {
+  for (int i = 0; i < size; i++)
+  {
     printf("%i ", array[i]);
   }
 
@@ -32,11 +34,14 @@ int main() {
 
 // A - Array to be sorted
 // n - Length of A
-void insertionSort(int A[], int n) {
-  for (int i = 1; i < n; i++) {
+void insertionSort(int A[], int n)
+{
+  for (int i = 1; i < n; i++)
+  {
     int current = A[i];
     int j = i - 1;
-    while (j >= 0 && A[j] > current) {
+    while (j >= 0 && A[j] > current)
+    {
       A[j + 1] = A[j];
       j--;
     }

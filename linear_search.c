@@ -25,6 +25,9 @@ int main(int argc, char const *argv[]) {
   return 0;
 }
 
+// A - Array where the value will be searched
+// n - Size of the array A
+// x - Value to be searched
 void linearSearch(int A[], int n, int x)
 {
   int i = 0;
