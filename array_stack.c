@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <limits.h>
 
 struct Stack
 {
@@ -16,8 +17,9 @@ bool push(struct Stack *, int);
 int pop(struct Stack *);
 
 
-int main(int argc, char const *argv[])
+int main()
 {
+  int value;
   struct Stack stack;
   int capacity;
   printf("Stack capacity:\n");
@@ -25,17 +27,67 @@ int main(int argc, char const *argv[])
 
   createStack(&stack, capacity);
 
-  if(push(&stack, 50))
-  {
-    printf("Pushed\n");
-  }
-  else
-  {
-    printf("Error\n");
-  }
+  int option;
 
-  int value = pop(&stack);
-  printf("%i\n", value);
+  printf("1 - empty\n2 - full\n3 - push\n4 - pop\n0 - quit\n");
+  scanf("%i", &option);
+
+  while (option != 0)
+  {
+    switch (option)
+    {
+    case 1:
+      if (isEmpty(&stack))
+      {
+        printf("The stack is empty\n");
+      }
+      else
+      {
+        printf("The stack is not empty\n");
+      }
+      break;
+    case 2:
+      if (isFull(&stack))
+      {
+        printf("The stack is full\n");
+      }
+      else
+      {
+        printf("The stack is not full\n");
+      }
+      break;
+    case 3:
+      printf("Value to push: ");
+      printf("\n");
+      scanf("%i", &value);
+      if (push(&stack, value))
+      {
+        printf("Pushed %i into the stack\n", value);
+      }
+      else
+      {
+        printf("Cant push, the stack is full\n");
+      }
+      break;
+    case 4:
+      value = pop(&stack);
+      if (value != INT_MAX)
+      {
+        printf("Poped %i from the stack\n", value);
+      }
+      else
+      {
+        printf("Cant pop, the stack is empty\n");
+      }
+      break;
+    default:
+      printf("Invalid option\n");
+      break;
+    }
+    printf("1 - empty\n2 - full\n3 - push\n4 - pop\n0 - quit\n");
+    scanf("%i", &option);
+  }
+  
 
   return 0;
 }
@@ -78,9 +130,9 @@ bool push(struct Stack *p, int x)
 
 int pop(struct Stack *p)
 {
-  if(isEmpty(p))
+  if (isEmpty(p))
   {
-    abort();
+    return INT_MAX;
   }
   p->top--;
   return p->elements[p->top + 1];
