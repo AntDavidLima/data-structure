@@ -1,37 +1,51 @@
-#define TRUE 1
-#define FALSE 0
-
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-int isEmpty(int);
-int isFull(int, int);
+struct Stack
+{
+  int top;
+  int capacity;
+  int *elements;
+};
+
+void createStack(struct Stack *, int);
+bool isEmpty(struct Stack *);
+bool isFull(struct Stack *);
 
 int main(int argc, char const *argv[])
 {
+  struct Stack stack;
   int capacity;
   printf("Stack capacity:\n");
   scanf("%i", &capacity);
 
-  int stack[capacity];
-  int top = 0;
+  createStack(&stack, capacity);
 
   return 0;
 }
 
-int isEmpty(int top)
+bool isEmpty(struct Stack *p)
 {
-  if (top < 0)
+  if (p->top < 0)
   {
-    return TRUE;
+    return true;
   }
-  return FALSE;
+  return false;
 }
 
-int isFull(int top, int capacity)
+bool isFull(struct Stack *p)
 {
-  if (top >= capacity - 1)
+  if (p->top >= p->capacity - 1)
   {
-    return TRUE;
+    return true;
   }
-  return FALSE;
+  return false;
+}
+
+void createStack(struct Stack *p, int capacity)
+{
+  p->capacity = capacity;
+  p->top = -1;
+  p->elements = (int *) malloc(capacity * sizeof(int));
 }
