@@ -12,6 +12,8 @@ struct Stack
 void createStack(struct Stack *, int);
 bool isEmpty(struct Stack *);
 bool isFull(struct Stack *);
+bool push(struct Stack *, int);
+
 
 int main(int argc, char const *argv[])
 {
@@ -21,6 +23,17 @@ int main(int argc, char const *argv[])
   scanf("%i", &capacity);
 
   createStack(&stack, capacity);
+
+  if(push(&stack, 50))
+  {
+    printf("Pushed\n");
+  }
+  else
+  {
+    printf("Error\n");
+  }
+
+  printf("%i\n", stack.elements[stack.top]);
 
   return 0;
 }
@@ -48,4 +61,15 @@ void createStack(struct Stack *p, int capacity)
   p->capacity = capacity;
   p->top = -1;
   p->elements = (int *) malloc(capacity * sizeof(int));
+}
+
+bool push(struct Stack *p, int x)
+{
+  if (isFull(&p))
+  {
+    return false;
+  }
+  p->top++;
+  p->elements[p->top] = x;
+  return true;
 }
