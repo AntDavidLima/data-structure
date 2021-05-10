@@ -11,6 +11,7 @@ struct Queue
 };
 
 void createQueue(struct Queue *, int);
+bool emptyQueue(struct Queue *);
 
 int main(int argc, char const *argv[])
 {
@@ -23,7 +24,14 @@ int main(int argc, char const *argv[])
 
   createQueue(&queue, capacity + 1);
 
-  printf("First: %i Last: %i Capacity: %i\n", queue.first, queue.last, queue.capacity);
+  if(emptyQueue(&queue))
+  {
+    printf("Empty\n");
+  }
+  else
+  {
+    printf("Not Empty\n");
+  }
 
   return 0;
 }
@@ -34,4 +42,13 @@ void createQueue(struct Queue *p, int c)
   p->last = 0;
   p->capacity = c;
   p->elements = (int *) malloc(c * sizeof(int));
+}
+
+bool emptyQueue(struct Queue *p)
+{
+  if(p->first == p-> last)
+  {
+    return true;
+  }
+  return false;
 }
