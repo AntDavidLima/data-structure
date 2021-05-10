@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <limits.h>
 
 struct Queue
 {
@@ -14,6 +15,7 @@ void createQueue(struct Queue *, int);
 bool emptyQueue(struct Queue *);
 bool fullQueue(struct Queue *);
 bool enqueue(struct Queue *, int);
+int dequeue(struct Queue *);
 
 int main(int argc, char const *argv[])
 {
@@ -33,6 +35,14 @@ int main(int argc, char const *argv[])
 
   enqueue(&queue, value);
 
+  printf("Value to enqueue: ");
+  printf("\n");
+  scanf("%i", &value);
+
+  enqueue(&queue, value);
+
+  printf("%i\n", dequeue(&queue));
+  printf("%i\n", dequeue(&queue));
   return 0;
 }
 
@@ -78,4 +88,21 @@ bool enqueue(struct Queue *p, int x)
     p->last++;
   }
   return true;
+}
+
+int dequeue(struct Queue *p)
+{
+  if(emptyQueue(&p))
+  {
+    return INT_MAX;
+  }
+  int value = p->elements[p->first];
+  if(p->first == p->capacity){
+    p->first = 0;
+  }
+  else
+  {
+    p->first++;
+  }
+  return value;
 }
