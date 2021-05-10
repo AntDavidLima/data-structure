@@ -13,11 +13,13 @@ struct Queue
 void createQueue(struct Queue *, int);
 bool emptyQueue(struct Queue *);
 bool fullQueue(struct Queue *);
+bool enqueue(struct Queue *, int);
 
 int main(int argc, char const *argv[])
 {
   struct Queue queue;
   int capacity;
+  int value;
 
   printf("Queue capacity: ");
   printf("\n");
@@ -25,14 +27,11 @@ int main(int argc, char const *argv[])
 
   createQueue(&queue, capacity + 1);
 
-  if(fullQueue(&queue))
-  {
-    printf("Full\n");
-  }
-  else
-  {
-    printf("Not Full\n");
-  }
+  printf("Value to enqueue: ");
+  printf("\n");
+  scanf("%i", &value);
+
+  enqueue(&queue, value);
 
   return 0;
 }
@@ -61,4 +60,22 @@ bool fullQueue(struct Queue *p)
     return true;
   }
   return false;
+}
+
+bool enqueue(struct Queue *p, int x)
+{
+  if(fullQueue(&p))
+  {
+    return false;
+  }
+  p->elements[p->last] = x;
+  if(p->last == p->capacity)
+  {
+    p->last = 0;
+  }
+  else
+  {
+    p->last++;
+  }
+  return true;
 }
